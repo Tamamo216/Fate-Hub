@@ -1,0 +1,54 @@
+.class-header {
+  background-color: #c5c2c2;
+  font-size: 30px;
+  font-weight: 700;
+  padding: 5px 10px;
+  margin-bottom: 10px; }
+
+.servant-avatar {
+  width: 100%;
+  aspect-ratio: 1/1; }
+
+.servant-name {
+  font-family: 'inter', sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  color: coral;
+  text-decoration: none; }
+
+.class-img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px; }
+
+#servant-img-card-deck {
+  width: 580px;
+  height: 120px; }
+
+#servant-img-details {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 5px; }
+
+.skill-img {
+  width: 50px;
+  height: 50px; }
+
+#servants-class-list img {
+  width: 100%;
+  height: auto; }
+
+#servants-class-list span {
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  color: cornflowerblue; }
+
+#servants-class-list > div {
+  cursor: pointer; }
+
+#servants-class-list > div:hover {
+  background-color: aquamarine; }
+
+#servants-class-list > div.active {
+  background-color: lightsteelblue; }

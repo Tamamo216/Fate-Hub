@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-2">
+    <nav class="nav nav-pills flex-column user-nav">
+      <a class="nav-link" href="/user/profile">Profile</a>
+      <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
+      {{#if user.password}}
+      <a class="nav-link" href="/user/change-password">Change password</a>
+      {{/if}}
+      <a class="nav-link active" href="/user/delete-account">Delete this account</a>
+    </nav>
+  </div>
+  <div class="col-4">
+    <p style="font-family: 'Roboto', sand-serif; font-size: 1.2em;">
+      This account will be deleted completely and you will no longer be able to log into it again in the future.
+    </p>
+    <div class="d-flex justify-content-center">
+      <!-- Button trigger modal -->
+      <button class="btn btn-danger rounded-3" id="delete-btn" data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal">
+        Delete it
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="delete-confirmation-modal" tabindex="-1" aria-labelledby="delete-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="delete-modal-title">Confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+        <span style="font-family: 'Source Sans Pro', sans-serif; font-size: 1.2em;">
+          Are you sure want to delete this account?
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary rounded-3 me-3" data-bs-dismiss="modal">
+          I changed my mind
+        </button>
+        <button class="btn btn-success rounded-3" id="delete-confirm-btn">
+          YES!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/remove_user.js">
+  document.getElementById("delete-confirm-btn").addEventListener("click", () => {
+    fetch("/user/delete-account", {
+      method: "DELETE",
+      headers: {"Content-type" : "application/json"},
+    })
+      .then(async (response) => {
+        if (response.status === 302)
+          const data = await response.json();
+          window.location.href = data.redirect;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+</script>

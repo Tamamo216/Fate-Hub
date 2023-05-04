@@ -1,0 +1,33 @@
+<div class="container mt-3">
+  <div class="mx-auto" style="width: 30%">
+    <input type="text" class="form-control" id="servant-search-field" placeholder="Enter a servant's name...">
+    <div class="d-flex justify-content-center mt-3">
+      <button type="button" class="btn btn-secondary me-3" id="back-btn">Back</button>
+      <button type="button" class="btn btn-primary" id="search-btn">Search</button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <div class="row row-cols-6 border rounded-2 p-2" style="max-heigt: 400px; overflow: auto; width: 80%;">
+      {{#each matchServants}}
+      <div class="col text-center">
+        <a href="{{details_url}}">
+          <img class="servant-avatar" src="{{avatar}}" alt="servant-avt">
+        </a>
+        <a href="{{details_url}}" class="servant-name">
+          {{name}}
+        </a>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("back-btn").addEventListener("click", () => {
+    window.location.href = "/servants";
+  });
+  document.getElementById("search-btn").addEventListener("click", () => {
+    const nameSearch = document.getElementById("servant-search-field").value;
+    const queryString = new URLSearchParams({q: nameSearch});
+    window.location.search = queryString;
+  })
+</script>

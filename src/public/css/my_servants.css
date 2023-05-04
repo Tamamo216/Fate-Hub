@@ -1,0 +1,134 @@
+#myservant-navbar {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin-top: 5px; }
+
+#myservant-navbar nav {
+  border-bottom: 2px solid #f25050;
+  padding: 5px; }
+
+#myservant-navbar a.nav-link {
+  font-family: 'Prompt', sans-serif;
+  color: black;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: color 0.3s ease-in-out; }
+
+#myservant-navbar a.nav-link:not(.active):hover {
+  color: lime; }
+
+#myservant-navbar a.nav-link.active {
+  background-color: lime;
+  color: white; }
+
+.myservant-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 240px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 3px; }
+
+.myservant-card:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: aqua;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-out; }
+
+.myservant-card:hover:before {
+  transform: scaleX(1); }
+
+.myservant-avt {
+  width: 100%;
+  position: relative; }
+
+.myservant-avt-img {
+  width: 100%;
+  aspect-ratio: 1/1; }
+
+.myservant-class-img {
+  height: 50px;
+  width: 50px; }
+
+.myservant-star {
+  color: #faeb13;
+  font-size: 1.1em; }
+
+.myservant-name {
+  display: flex;
+  text-align: center;
+  font-size: 16px;
+  flex: 1 1 auto;
+  overflow: hidden; }
+
+.myservant-name a {
+  text-decoration: none;
+  color: crimson; }
+
+.myservant-detail-name {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: crimson;
+  margin-left: 20px; }
+
+.myservant-selected {
+  border: 2px solid springgreen; }
+
+button.fav-btn:hover {
+  border: 3px solid #7fffc8; }
+
+button.clicked, button.clicked:hover {
+  background-color: #7fffc8;
+  color: black; }
+
+.sort-info {
+  background-color: darkcyan;
+  color: white;
+  width: fit-content;
+  padding: 5px;
+  margin-bottom: 2px;
+  border-radius: 10px; }
+
+.instruction-text {
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: 600;
+  color: magenta; }
+
+.empty-inform-text {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: crimson;
+  max-width: 300px; }
+
+#selected-servant-avt {
+  height: 150px;
+  width: 150px; }
+
+#selected-servant-name {
+  margin-left: 20px;
+  font-size: 1.5em;
+  font-weight: 600;
+  text-align: center;
+  color: crimson; }
+
+.favorite-servant-heart {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  color: deeppink;
+  font-size: 1.6em; }
+
+table th, table td {
+  text-align: center; }

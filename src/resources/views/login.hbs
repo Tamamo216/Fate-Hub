@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="login-wraper">
+    <div class="row w-100 m-0 mt-3">
+      <div class="col-6 px-0">
+        <img src="/img/login_izo.png" class="img-fluid rounded-start" alt="login-background-img">
+      </div>
+      <div class="col-6 px-0">
+        <form class="login-form p-3 rounded-end" action="/login" method="POST" novalidate>
+          <h3 class="login-register-title">Sign in</h3>
+          <div class="form-group">
+            <span class="login-icon">
+              <i class="fa-regular fa-user"></i>
+            </span>
+            <input type="text" class="form-control" id="username-field" name="username" placeholder="Username" required>
+            <div class="invalid-feedback">
+              You must fill in your username
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="login-icon">
+              <i class="fa-solid fa-key"></i>
+            </span>
+            <input type="password" class="form-control" id="password-field" name="password" placeholder="Password" required>
+            <div class="invalid-feedback">
+              You must fill in your password
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="checkbox" class="form-check-input" name = "remember" value="yes" id="remember-login-checkbox">
+            <label for="remember-login-checkbox" class="form-check-label">Remember me?</label>
+          </div>
+          {{#if errorMessage}}
+          <div class="mb-3">
+            <span style="color: red;">{{errorMessage}}</span>
+          </div>
+          {{/if}}
+          <div class="d-flex justify-content-center mb-3">
+            <button type="submit" class="btn btn-outline-primary px-5 rounded-4 me-3" id="login-btn">Sign in</button>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="d-flex justify-content-center mb-2">Sign in with:</div>
+              <div class="d-flex justify-content-center">
+                <button type="button" id="google-sign-in-btn" class="external-login-btn">
+                  <i class="fa-brands fa-google"></i>
+                </button>
+                <button type="button" id="facebook-sign-in-btn" class="external-login-btn">
+                  <i class="fa-brands fa-microsoft"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <span>
+              Create an account if you don't have one<br>
+              <a href="/register" style="text-decoration: none;">
+                Sign up
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+   </div> 
+</div>
+<script>
+  document.getElementById("google-sign-in-btn").addEventListener("click", () => {
+    window.location.href = "/login/oauth2/google";
+  });
+  document.getElementById("facebook-sign-in-btn").addEventListener("click", () => {
+    window.location.href = "/login/oauth2/microsoft";
+  })
+  document.getElementById("register-btn").addEventListener("click", () => {
+    window.location.href = "/register";
+  });
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+    }
+    form.classList.add("was-validated");
+  })
+</script>

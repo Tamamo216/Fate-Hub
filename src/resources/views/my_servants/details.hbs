@@ -1,0 +1,223 @@
+{{#with myServant}}
+<div class="container mx-auto border border-2 rounded-2" style="height: 550px; width: 1000px;">
+  <div class="row border-bottom border-2 d-flex justify-content-between">
+    <div class="col-auto d-flex align-items-center">
+      <a href="{{details_url}}">
+        <img src="{{avatar}}" alt="servant-avt" style="width: 100px; height: 100px;">
+      </a>
+      <a href="{{details_url}}" style="text-decoration: none;">
+        <span class="myservant-detail-name">{{name}}</span>
+      </a>
+    </div>
+    <div class="col-1 me-3 d-flex align-items-center">
+      <button type="button" class="btn btn-outline-success rounded-4" style="font-size: 1.3em;" id="edit-btn">Edit</button>
+    </div>
+  </div>
+  <div class="row g-4 p-3">
+    <div class="col-9">
+      <form action="/user/my-servants/details/{{servant_id}}">
+        <div class="row mb-3">
+          <label class="col-3 col-form-label" for="personal-nickname-field">
+            Personal Nickname
+          </label>
+          <div class="col-7">
+            <input type="text" class="form-control" id="personal-nickname-field" value="{{personal_nickname}}" name="personalNickname" readonly>
+          </div>
+        </div>
+        <div class="row mb-3 gx-4 d-flex justify-content-between">
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="servant-level-field">
+                Servant level
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="servant-level-field" value="{{servant_level}}" name="servantLevel" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="np-level-field">
+                NP level
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="np-level-field" value="{{np_level}}" name="npLevel" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3 d-flex justify-content-between">
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="atk-field">
+                ATK
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="atk-field" value="{{atk}}" name="atk" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="hp-field">
+                HP
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="hp-field" value="{{hp}}" name="hp" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3 d-flex justify-content-between">
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="fou-atk-field">
+                Fou ATK
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="fou-atk-field" value="{{fou_atk}}" name="fouATK" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="fou-hp-field">
+                Fou HP
+              </label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="fou-hp-field" value="{{fou_hp}}" name="fouHP" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-5">
+            <div class="row">
+              <label class="col-5 col-form-label" for="bond-field">Bond Level</label>
+              <div class="col-5">
+                <input type="number" class="form-control" id="bond-field" value="{{bond_lv}}" name="bondLevel" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-2 col-form-label" for="skill1-field">Skills level</label>
+          <div class="col-2">
+            <div class="form-floating">
+              <input type="number" class="form-control" id="skill1-field" value="{{skill1_lv}}" name="skill1" readonly>
+              <label for="skill1-field">Skill 1</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating">
+              <input type="number" class="form-control" id="skill2-field" value="{{skill2_lv}}" name="skill2" readonly>
+              <label for="skill2-field">Skill 2</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating">
+              <input type="number" class="form-control" id="skill3-field" value="{{skill3_lv}}" name="skill3" readonly>
+              <label for="skill3-field">Skill 3</label>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+          <div class="col d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary rounded-4 me-3" id="cancel-btn" hidden>Cancel</button>
+            <button type="submit" class="btn btn-primary rounded-4" id="save-btn" hidden>Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-3 border border-primary border-2 rounded-2 p-2">
+      <div class="d-flex justify-content-center mb-3">
+        <span class="myservant-star">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </span>
+      </div>
+      <img src="{{img_details}}" class="img-fluid" alt="details-img">
+    </div>
+  </div>
+</div>
+{{/with}}
+
+<div class="container mx-auto p-2" style="width: 1000px; margin-top: 50px;">
+  <span style="font-size: 1.5em; font-weight: 600;">
+    Additional Information
+  </span>
+  <table class="table table-bordered align-middle">
+    <tbody>
+      <tr>
+        <th>Target level</th>
+        <th>Required 5* EXP cards</th>
+        <th>Required 4* EXP cards</th>
+        <th>QP cost</th>
+      </tr>
+      {{#each levelingCost}}
+      <tr>
+        <td>{{targetLevel}}</td>
+        <td>{{requiredFiveStarExp}}</td>
+        <td>{{requiredFourStarExp}}</td>
+        <td>{{requiredQP}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tbody class="table-group-divider">
+      <tr>
+        <th rowspan="3">QP cost to maximize skill level</th>
+        <th>Skill 1</th>
+        <th>Skill 2</th>
+        <th>Skill 3</th>
+      </tr>
+      {{#with qpCost}}
+      <tr>
+        <td>{{skill1}}</td>
+        <td>{{skill2}}</td>
+        <td>{{skill3}}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total QP: {{total}}</td>
+      </tr>
+      {{/with}}
+    </tbody>
+  </table>
+</div>
+<script>
+  const inputs = document.querySelectorAll("input");
+  const saveBtn = document.getElementById("save-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const editBtn = document.getElementById("edit-btn");
+  editBtn.addEventListener("click", () => {
+    inputs.forEach((input) => {
+      input.removeAttribute("readonly");
+    });
+    saveBtn.removeAttribute("hidden");
+    cancelBtn.removeAttribute("hidden");
+  });
+  cancelBtn.addEventListener("click", () => {
+    inputs.forEach((input) => {
+      input.setAttribute("readonly", "");
+    });
+    saveBtn.setAttribute("hidden", "");
+    cancelBtn.setAttribute("hidden", "");
+  });
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: "PUT",
+      headers: {"Content-type" : "application/json"},
+      body: JSON.stringify(Object.fromEntries(formData))
+    })
+      .then((response) => {
+        if (response.status === 200)
+          window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  })
+</script>

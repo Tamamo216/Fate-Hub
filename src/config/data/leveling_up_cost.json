@@ -1,0 +1,26 @@
+[
+  {
+    "ID": 1,
+    "start level": 1,
+    "target level": 90,
+    "5* EXP cards": 150,
+    "4* EXP cards": 450,
+    "QP cost": 9000000
+  },
+  {
+    "ID": 2,
+    "start level": 1,
+    "target level": 100,
+    "5* EXP cards": 251,
+    "4* EXP cards": 753,
+    "QP cost": 68000000
+  },
+  {
+    "ID": 3,
+    "start level": 1,
+    "target level": 120,
+    "5* EXP cards": 5266,
+    "4* EXP cards": 15798,
+    "QP cost": 416000000
+  }
+]

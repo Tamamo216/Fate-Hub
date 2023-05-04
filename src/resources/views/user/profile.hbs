@@ -1,0 +1,122 @@
+{{#with user}}
+<div class="row mt-3">
+  <div class="col-2">
+    <nav class="nav nav-pills flex-column user-nav">
+      <a class="nav-link active" href="/user/profile">Profile</a>
+      <a class="nav-link" href="/user/profile/edit">Edit profile</a>
+      {{#if password}}
+      <a class="nav-link" href="/user/change-password">Change password</a>
+      {{/if}}
+      <a class="nav-link" href="/user/delete-account">Delete this account</a>
+    </nav>
+  </div>
+  <div class="col-6" style="font-size: 1.5rem;">
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            <i class="fa-solid fa-envelope"></i>
+            Email
+          </span>
+        </div>
+        <div class="col-8">
+          <span>{{email}}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            <i class="fa-solid fa-user"></i>
+            Profile name
+          </span>
+        </div>
+        <div class="col-8">
+          <span>{{display_name}}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>Firstname</span>
+        </div>
+        <div class="col-8">
+          {{#if firstname}}
+          <span>{{firstname}}</span>
+          {{else}}
+          <span>______</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>Lastname</span>
+        </div>
+        <div class="col-8">
+          {{#if lastname}}
+          <span>{{lastname}}</span>
+          {{else}}
+          <span>______</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            <i class="fa-solid fa-phone"></i>
+            Phone number
+          </span>
+        </div>
+        <div class="col-8">
+          {{#if phone_number}}
+          <span>{{phone_number}}</span>
+          {{else}}
+          <span>______</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            Gender
+          </span>
+        </div>
+        <div class="col-8">
+          <span>{{gender}}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            <i class="fa-solid fa-globe"></i>
+            Nationality
+          </span>
+        </div>
+        <div class="col-8">
+          {{#if nationality}}
+            {{nationality}}
+          {{else}}
+            ______
+          {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <span>
+            <i class="fa-solid fa-cake-candles"></i>
+            Birthday
+          </span>
+        </div>
+        <div class="col-8">
+          {{#if birthday}}
+          <span>{{birthday}}</span>
+          {{else}}
+          <span>__/__/____</span>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 d-flex align-items-center">
+    <img src="{{avatar}}" alt="user-avt" style="width: 100%; aspect-ratio: 1/1; border: 1px solid  blue; border-radius: 50%;">
+  </div>
+</div>
+{{/with}}

@@ -1,0 +1,141 @@
+<div class="container mx-auto" style="width: 400px;">
+  <div class="row mb-3">
+    <div class="col d-flex align-items-center">
+      <img id="selected-servant-avt" src="{{servant.avatar}}" alt="servant-avt">
+      <span id="selected-servant-name">{{servant.name}}</span>
+    </div>
+  </div>
+  <form class="border border-2 p-2 rounded-2" action="/user/my-servants/add-servant/{{servant.id}}" method="POST" style="width: 400px;" novalidate>
+    <div class="row mb-3 gx-2 d-flex justify-content-around">
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="servant-level-field" name="servantLevel" placeholder="servant level" value="1" min="1" max="120">
+          <label for="servant-level-field">Servant level</label>
+          <div class="invalid-feedback">
+            Servant level must be between 1 and 120
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="form-floating">
+          <select class="form-select" id="NP-level" name="npLevel">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <label for="NP-level">NP level</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 gx-2 d-flex justify-content-around">
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="atk-field" name="atk" placeholder="servant atk" value="{{servant.minATK}}" min="{{servant.minATK}}">
+          <label for="atk-field">ATK</label>
+          <div class="invalid-feedback">
+            Your ATK input is lower than the minimum ATK of this servant({{servant.minATK}})
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="hp-field" name="hp" placeholder="servant hp" value="{{servant.minHP}}" min="{{servant.minHP}}">
+          <label for="hp-field">HP</label>
+          <div class="invalid-feedback">
+            Your HP input is lower than the minimum HP of this servant({{servant.minHP}})
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 gx-2 d-flex justify-content-around">
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="fou-atk-field" name="fouATK" placeholder="fou atk" min="0" max="2000" step="10" value="0">
+          <label for="fou-atk-field">Fou ATK</label>
+          <div class="invalid-feedback">
+            Fou ATK must be between 0 and 2000
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="fou-hp-field" name="fouHP" placeholder="fou hp" min="0" max="2000" step="10" value="0">
+          <label for="fou-hp-field">Fou HP</label>
+          <div class="invalid-feedback">
+            Fou HP must be between 0 and 2000
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 gx-2 d-flex justify-content-around">
+      <div class="col-5">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="bond-field" value="0" min="0" max="10" name="bondLevel" placeholder="bond level">
+          <label for="bond-field">Bond Level</label>
+          <div class="invalid-feedback">
+            Bond level must be between 0 and 10
+          </div>
+        </div>
+      </div>
+      <div class="col-5"></div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-3 col-form-label" for="skill1-lv">  
+        Skills level
+      </label>
+    </div>
+    <div class="row mb-3 d-flex justify-content-around">
+      <div class="col-4">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="skill1-lv" value="1" min="1" max="10" name="skill1">
+          <label for="skill1-lv">Skill 1</label>
+          <div class="invalid-feedback">
+            Skill level must be between 1 and 10
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="skill2-lv" value="1" min="1" max="10" name="skill2">
+          <label for="skill2-select">Skill 2</label>
+          <div class="invalid-feedback">
+            Skill level must be between 1 and 10
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="skill3-lv" value="1" min="1" max="10" name="skill3">
+          <label for="skill3-lv">Skill 3</label>
+          <div class="invalid-feedback">
+            Skill level must be between 1 and 10
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-9">
+        <label class="form-label" for="personal-nickname-field">Personal Nickname</label>
+        <input type="text" class="form-control" id="personal-nickname-field" name="personalNickname">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center py-2">
+      <button type="button" class="btn btn-secondary rounded-3 me-2" id="prev-btn">Back</button>
+      <button type="submit" class="btn btn-success rounded-3" id="finish-btn">Finish</button>
+    </div>
+  </form>
+</div>
+<script>
+  document.getElementById("prev-btn").addEventListener("click", () => {
+    window.location.href = "/user/my-servants/add-servant";
+  });
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+    }
+    form.classList.add("was-validated");
+  })
+</script>

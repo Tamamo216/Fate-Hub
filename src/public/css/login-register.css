@@ -1,0 +1,73 @@
+.register-wraper {
+  width: 70%;
+  max-height: 550px;
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  margin: 10px auto; }
+
+.register-form {
+  background-color: white;
+  width: 100%;
+  height: auto; }
+
+.login-wraper {
+  width: 50%;
+  max-height: 550px;
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  margin: 10px auto; }
+
+.login-form {
+  background-color: #191919;
+  color: gray;
+  width: 100%;
+  height: 100%; }
+
+.login-register-title {
+  font-family: 'Noto Serif', serif;
+  font-size: 2.5em;
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 30px; }
+
+.login-form label {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-weight: 500; }
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px; }
+
+.login-icon {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 5px;
+  top: 0;
+  height: 36px; }
+
+.login-form input.form-control {
+  background-color: rgba(25, 25, 25, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 2px solid navy;
+  border-radius: 0;
+  padding-left: 2em; }
+
+.external-login-btn {
+  background-color: aliceblue;
+  color: gray;
+  border-radius: 50%;
+  font-size: 1.2em;
+  margin-right: 10px;
+  transition: all 0.3s ease-in; }
+
+.external-login-btn:hover {
+  background-color: dodgerblue;
+  color: white; }
+
+.register-form label {
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  font-style: italic; }

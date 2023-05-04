@@ -1,0 +1,189 @@
+<div class="row mt-2">
+  <div class="col-2">
+    <nav class="nav nav-pills flex-column user-nav">
+      <a class="nav-link" href="/user/profile">Profile</a>
+      <a class="nav-link active" href="/user/profile/edit">Edit profile</a>
+      {{#if user.password}}
+      <a class="nav-link" href="/user/change-password">Change password</a>
+      {{/if}}
+      <a class="nav-link" href="/user/delete-account">Delete this account</a>
+    </nav>
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col-auto">
+        <form style="width: 500px; margin-left: 20px" novalidate>
+          <div class="row">
+            <label for="email-field" class="col-3 col-form-label">Email</label>
+            <div class="col-9">
+              <div class="input-group">
+                <input type="email" id="email-field" class="form-control" value="{{user.email}}" name="email" readonly>
+                <span class="input-group-text">
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+              </div>          
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label for="role-field" class="col-3 col-form-label">Role</label>
+            <div class="col-9">
+              <input type="text" id="role-field" class="form-control-plaintext" value="User" readonly>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label for="profilename-field" class="col-form-label col-3">Profile name</label>
+            <div class="col-9">
+              <input type="text" id="profilename-field" class="form-control" value="{{user.display_name}}" required maxlength="10">
+            </div>
+            <div class="invalid-feedback">
+              Profile name must not be empty and has at most 10 characters
+            </div>
+          </div>
+          <div class="row mt-3 g-2">
+            <div class="col-5 form-floating">
+              <input type="text" id="firstname-field" class="form-control" placeholder="firstname" value="{{user.firstname}}" name="firstname">
+              <label for="firstname-field">Firstname</label>
+            </div>
+            <div class="col-5 form-floating">
+              <input type="text" id="lastname-field" class="form-control" placeholder="lastname" value="{{user.lastname}}" name="lastname">
+              <label for="lastname-field">Lastname</label>
+            </div> 
+          </div>
+          <div class="row mt-3 g-2">
+            <div class="input-group">
+              <div class="col-8 form-floating">
+                <input type="text" id="phone-number-field" class="form-control" placeholder="phonenumber" value="{{user.phone_number}}" name="phone_number" minlength="10" maxlength="10">
+                <label for="phone-number-field">Phone number</label>
+                <div class="invalid-feedback">
+                  invalid phone number
+                </div>
+              </div>
+              <span class="input-group-text">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label for="gender-select" class="col-2 col-form-label">
+              Gender
+            </label>
+            <div class="col-3">
+              <select id="gender-select" class="form-select" name="gender">
+                {{#select user.gender}}
+                <option value="" selected>Choose</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                {{/select}}
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="input-group col-8">
+              <div class="form-floating">
+                <input type="text" id="nationality-field" class="form-control" placeholder="nationality" value="{{user.nationality}}">
+                <label for="nationality-field">Nationality</label>
+              </div>
+              <span class="input-group-text">
+                <i class="fa-solid fa-globe"></i>
+              </span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="form-label col" >
+              Birthday
+              <i class="fa-solid fa-cake-candles"></i>
+            </label>
+          </div>
+          <div class="row mt-3 g-2">
+            <div class="col-4 form-floating">
+              <select class="form-select" id="day-select" name="birthday_day">
+                {{#selectBirthDay user.birthday "day"}}
+                {{#each days}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+                {{/selectBirthDay}}
+              </select>
+              <label for="day-select">Day</label>
+            </div>
+            <div class="col-4 form-floating">
+              <select class="form-select" id="month-select" name="birthday_month">
+                {{#selectBirthDay user.birthday "month"}}
+                {{#each months}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+                {{/selectBirthDay}}
+              </select>
+              <label for="month-select">Month</label>
+            </div>
+            <div class="col-4 form-floating">
+              <select class="form-select" id="year-select" name="birthday_year">
+                {{#selectBirthDay user.birthday "year"}}
+                {{#each years}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+                {{/selectBirthDay}}
+              </select> 
+              <label for="year-select">Year</label>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col d-flex flex-row justify-content-evenly">
+              <button type="button" class="btn btn-secondary" id="back-btn">Back</button>
+               <button type="button" id="reset-btn" class="btn btn-danger">
+                Reset
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </button>
+              <button type="button" id="update-btn" class="btn btn-success me-2" disabled>
+                Update
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-3 d-flex flex-column align-items-center" style="margin-left: 100px;">
+        <img src="{{user.avatar}}" class="border border-primary rounded-circle" id="user-avt" alt="gudako-img" style="width: 300px; height: 300px;">
+        <!-- button trigger modal -->
+        <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#selectAvatarModal">
+          Choose avatar
+          <span>
+            <i class="fa-regular fa-image"></i>
+          </span>
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="selectAvatarModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Choose an image as your avatar</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button> 
+              </div>
+              <div class="modal-body">
+                <div class="d-flex flex-row justify-content-between" style="width: 450px;">
+                  <div class="avt-img-selection">
+                    <input type="image" src="/img/master_avatar/gudao.jpg" alt="gudao-avt" class="avt-img-modal">
+                    <span class="check-mark">
+                     <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                  </div>
+                  <div class="avt-img-selection">
+                    <input type="image" src="/img/master_avatar/gudako.jpg" alt="gudako-avt" class="avt-img-modal">
+                    <span class="check-mark">
+                      <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" id="save-avt-btn" data-bs-dismiss="modal">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/profile_update.js"></script>
+  </div>
+</div>

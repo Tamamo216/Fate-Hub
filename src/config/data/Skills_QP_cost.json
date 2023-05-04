@@ -1,0 +1,42 @@
+[
+  {
+    "skill level": 1,
+    "QP cost": 0
+  },
+  {
+    "skill level": 2,
+    "QP cost": 200000
+  },
+  {
+    "skill level": 3,
+    "QP cost": 400000
+  },
+  {
+    "skill level": 4,
+    "QP cost": 1200000
+  },
+  {
+    "skill level": 5,
+    "QP cost": 1600000
+  },
+  {
+    "skill level": 6,
+    "QP cost": 4000000
+  },
+  {
+    "skill level": 7,
+    "QP cost": 5000000
+  },
+  {
+    "skill level": 8,
+    "QP cost": 10000000
+  },
+  {
+    "skill level": 9,
+    "QP cost": 12000000
+  },
+  {
+    "skill level": 10,
+    "QP cost": 20000000
+  }
+]

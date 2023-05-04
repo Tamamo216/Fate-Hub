@@ -1,0 +1,109 @@
+<div id="myservant-navbar" class="mx-auto" style="width: 500px;">
+  <nav class="mb-3">
+    <ul class="nav justify-content-around">
+      <a class="nav-link" href="/user/my-servants">My Servants</a>
+      <a class="nav-link active" href="/user/my-servants/add-servant">Add Servants</a>
+      <a class="nav-link" href="/user/my-servants/remove-servants">Delete Servants</a>
+    </ul>
+  </nav>
+</div>
+<form style="width: 500px; margin-bottom: 30px; margin-inline: auto auto" method="GET">
+  <div class="row">
+    <div class="col">
+      <div class="input-group">
+        <input type="text" class="form-control shadow-none" placeholder="Search by servant name..." name="search">
+        <span class="input-group-text bg-success">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col d-flex justify-content-around">
+      <div class="form-floating">
+        {{#select order}}
+        <select class="form-select" id="sortby-select" name="order">
+          <option value="id">ID</option>
+          <option value="name">Name</option>
+          <option value="class">Class</option>
+        </select>
+        {{/select}}
+        <label for="sortby-select">Sort by</label>
+      </div>
+      <div class="form-floating">
+        {{#select filterValue}}
+        <select class="form-select" id="filter-select" name="filterValue">
+          <option value="">None</option>
+          <optgroup label="NP">
+            <option value="Buster">Buster</option>
+            <option value="Arts">Arts</option>
+            <option value="Quick">Quick</option>
+          </optgroup> 
+          <optgroup label="Class">
+            <option value="Saber">Saber</option>
+            <option value="Archer">Archer</option>
+            <option value="Lancer">Lancer</option>
+            <option value="Rider">Rider</option>
+            <option value="Caster">Caster</option>
+            <option value="Assassin">Assassin</option>
+            <option value="Berserker">Berserker</option>
+            <option value="Ruler">Ruler</option>
+            <option value="Avenger">Avenger</option>
+            <option value="Mooncaner">Mooncancer</option>
+            <option value="Foreigner">Foreigner</option>
+            <option value="Alter ego">Alter ego</option>
+            <option value="Pretender">Pretender</option>
+          </optgroup>
+        </select>
+        {{/select}}
+        <label for="filter-select">Filter</label>
+      </div>
+      <button type="submit" id="go-btn" class="btn btn-primary rounded-3 align-self-center">GO!</button>
+    </div>
+  </div>
+</form>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-8">
+      <div class="row row-cols-6 border border-2 rounded-3 gx-2 p-2" style="min-height: 300px; max-height: 600px; overflow: auto;">
+        {{#unless servants}}
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <span class="empty-inform-text">
+            There is no available servant for you to add
+          </span>
+        </div>
+        {{else}}
+          {{#each servants}}
+          <div class="col myservant-card" data-servantid="{{id}}">
+            {{#if sortInfo}}
+            <span class="sort-info">{{sortInfo.name}}: {{sortInfo.value}}</span>
+            {{/if}}
+            <img class="myservant-avt-img" src="{{avatar}}" alt="servant-avt">
+            <span class="myservant-star">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </span>
+            <div class="myservant-name">
+              {{name}}
+            </div>
+          </div>
+          {{/each}}
+        {{/unless}}
+      </div>
+    </div>
+    <div class="col-3 border rounded-end p-0" style="height: 300px;">
+      <div class="d-flex justify-content-center align-items-center border-bottom border-2 px-2" style="height: 80%">
+        <span class="instruction-text">
+          Choose a servant you want to add before moving to the next step
+        </span>
+      </div>
+      <div class="d-flex justify-content-center py-2">
+        <button class="btn btn-primary rounded-3" id="next-btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/add_servant.js"></script>

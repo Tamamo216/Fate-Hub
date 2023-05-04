@@ -1,0 +1,228 @@
+{{#with details}}
+<div class="card mx-auto">
+  <div class="card-header p-2 d-flex align-items-center">
+    <img class="class-img" src="{{class_img}}" alt="class-img">
+    <h2 class="card-title" style="font-family: 'Prompt', sans-serif; font-size: 2.5em; font-weight: 700; color: DarkMagenta;">
+      {{name}}
+    </h2>
+  </div>
+  <div class="card-body fs-5">
+    <div class="row px-3 py-2">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-8">
+          <strong clas="d-inline">Japanese name:</strong>
+          {{jp_name}}
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <strong>ID:</strong>
+            {{id}}
+          </div>
+          <div class="col-6">
+            <strong>Rarity:</strong>
+            {{rarity}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <strong>ATK:</strong>
+            {{atk}}
+          </div>
+          <div class="col-6">
+            <strong>HP:</strong>
+            {{hp}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <strong>Seiyuu:</strong>
+            {{seiyuu}}
+          </div>
+          <div class="col-6">
+            <strong>Illustrator:</strong>
+            {{artist}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <strong>Attribute:</strong>
+            {{atr}}
+          </div>
+          <div class="col-6">
+            <strong>Gender:</strong>
+            {{gender}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <img src="/img/status_effect/star_absorb.png" alt="star_absorb">
+            <strong>Star Absorbtion:</strong>
+            {{star_absorp}}
+          </div>
+          <div class="col-6">
+            <img src="/img/status_effect/star_gainup.png" alt="star_gainup">
+            <strong>Star Generation:</strong>
+            {{star_gen}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <img src="/img/status_effect/np_chargeup.png" alt="np_chargeup">
+            <strong>NP Charge ATK:</strong>
+            {{np_charge_atk}}
+          </div>
+          <div class="col-6">
+            <img src="/img/status_effect/np_gainup_dmg.png" alt="np_gainup_dmg">
+            <strong>NP Charge DEF:</strong>
+            {{np_charge_def}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <img src="/img/status_effect/instant_death.png" alt="instant_death">
+            <strong>Death Rate:</strong>
+            {{death_rate}}
+          </div>
+          <div class="col-6">
+            <strong>Alignments:</strong>
+            {{alignments}}
+          </div>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+          <div class="col-auto">
+            <img id="servant-img-card-deck" src="{{img_card_deck}}" alt="img-card-deck">
+          </div>
+        </div>
+        <div class="row border-bottom mt-5">
+          <h3><bold>Active Skills</bold></h3>
+        </div>
+        <div class="row mt-2">
+          <div class=" col d-flex justify-content-center bg-warning">
+            <nav class="nav nav-pills">
+              <a class="nav-link skill-tab active" href="#" data-skill="skill-1-content">Skill 1</a>
+              <a class="nav-link skill-tab" href="#" data-skill="skill-2-content">Skill 2</a>
+              <a class="nav-link skill-tab" href="#" data-skill="skill-3-content">Skill 3</a>
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-0">
+            <div class="servant-skill-info" id="skill-1-content">
+              <table class="table table-bordered text-center align-middle">
+                <tr>
+                  <td style="width: 20%; padding: 10px 0px">
+                    <img class="skill-img" src="{{skill1_img}}" alt="skill-img">
+                  </td>
+                  <td style="width: 80%; padding: 10px 0px">
+                    {{skill1_name}} {{skill1_rank}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    {{#each skill1_description}}
+                    {{this}}
+                    <br>
+                    {{/each}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="servant-skill-info d-none" id="skill-2-content">
+              <table class="table table-bordered text-center align-middle">
+                <tr>
+                  <td style="width: 20%; padding: 10px 0px">
+                    <img class="skill-img" src="{{skill2_img}}" alt="skill-img">
+                  </td>
+                  <td style="width: 80%; padding: 10px 0px">
+                    {{skill2_name}} {{skill2_rank}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    {{#each skill2_description}}
+                    {{this}}
+                    <br>
+                    {{/each}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="servant-skill-info d-none" id="skill-3-content">
+              <table class="table table-bordered text-center align-middle">
+                <tr>
+                  <td style="width: 20%; padding: 10px 0px">
+                    <img class="skill-img" src="{{skill3_img}}" alt="skill-img">
+                  </td>
+                  <td style="width: 80%; padding: 10px 0px">
+                    {{skill3_name}} {{skill3_rank}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    {{#each skill3_description}}
+                    {{this}}
+                    <br>
+                    {{/each}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <script src="/js/servant_details.js"></script>
+      </div>
+      <div class="col-4">
+        <img id="servant-img-details" src="{{img_details}}" alt="img-details">
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Noble Phantasm</h2>
+<table class="table table-bordered mx-auto text-center align-middle" style="width: 1000px">
+  <thead>
+  <tr>
+    <th colspan="4">
+      {{#each np_name}}
+      {{this}}
+      <br>
+      {{/each}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2">
+        <img class="np-img" src={{np_card}} alt="np-img">
+      </td>
+      <th>Rank</th>
+      <th>Noble Phantasm Type</th>
+      <th>Hit</th>
+    </tr>
+    <tr>
+      <td>{{np_rank}}</td>
+      <td>{{np_type}}</td>
+      <td>{{np_hits}}</td>
+    </tr>
+    <tr>
+      <th>Effect</th>
+      <td colspan="3">
+        {{#each np_effect}}
+        {{this}}
+        <br>
+        {{/each}}
+      </td>
+    </tr>
+    <tr>
+      <th>Overcharge Effect</th>
+      <td colspan="3">
+        {{#each np_oc}}
+        {{this}}
+        <br>
+        {{/each}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+{{/with}}

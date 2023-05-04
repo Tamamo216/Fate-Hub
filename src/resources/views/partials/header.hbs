@@ -1,0 +1,46 @@
+<div id="page-header">
+  <div class="row p-3 d-flex justify-content-between h-100">
+    <div class="col-4 d-flex justify-content-around align-items-center h-100">
+      <img src ="/img/web_logo.jpg" alt = "logo image" id="logo-img">
+      <span id="page-title">Fate Hub</span>
+    </div>
+    <div class="col-5 h-100">
+      <nav>
+        <div class="my-navbar py-2">
+          <ul class="nav d-flex justify-content-between align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/servants">Servants</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Upcoming Feature</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about-us">About us</a>
+            </li>
+          </ul>
+          <script src="/js/navbar.js"></script>
+        </div>
+      </nav>
+    </div>
+    <div class="col-2 px-3 d-flex justify-content-end align-items-center h-100">
+      {{#if displayName}}
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 1.2rem; font-weight: 600;">
+          <i class="fa-solid fa-circle-user"></i>
+          {{displayName}}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="/user/my-servants">My Servants</a></li>
+          <li><a class="dropdown-item" href="/logout">Log out</a></li>
+        </ul>
+      </div>
+      {{else}}
+      <button type="button" class="btn btn-outline-success rounded-4 px-4 me-2" onclick="location.href = '/login'" style="font-size: 1.1rem; font-weight: 600;">Sign in</button>
+      {{/if}}
+    </div>
+  </div>
+</div>

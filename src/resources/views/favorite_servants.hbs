@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="header-title">
+    MY FAVORITE SERVANTS IN FGO
+  </div>
+  <div class="row mt-3">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-2 p-0">
+          <select class="form-select" id="search-select">
+            <option>Choose</option>
+            <option value="name">Name</option>
+            <option value="class">Class</option>
+          </select>
+        </div>
+        <div class="col-7 p-0">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search..." id="search-input">
+            <button type="button" class="btn btn-success" id="servant-search-btn">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <script src="/js/search-servant.js"></script>
+      </div>
+      <div class="row row-cols-3 mt-3">
+        {{#each servants}}
+          <div class="col my-2">
+            <div class="card border border-2 border-primary text-center">
+              <a href="/servant/tamamo-no-mae">
+                <img class="card-img-top" src={{image}}>
+              </a>
+              <div class="card-body">
+                <a href="/servant/tamamo-no-mae">
+                  <div class="card-title fs-5 fw-bold"> {{name}} </div>
+                </a>
+                <div class="card-text">
+                  <b>Class: </b>
+                  {{class}}
+                </div>
+                <button type="button" class="btn btn-danger rounded-1 mt-2">Delete</button>
+              </div> 
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-3 ms-2 mt-3">
+      <form action="/servant/add" method="POST" class="border border-success rounded-2 p-2">
+        <div class="mb-3">
+          <label for="servant-name-input" class="form-label">Name</label>
+          <input type="text" name="servant_name" id="servant-name-input" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="servant-class-input" class="form-label">Class</label>
+          <input type="text" name="servant_class" id="servant-class-input" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="image-link-input" class="form-label">Image link</label>
+          <input type="text" name="image_link" id="image-link-input" class="form-control" placeholder="Paste the link to the servant image here">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-outline-success">Add servant</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
