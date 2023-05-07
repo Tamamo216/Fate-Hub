@@ -31,32 +31,36 @@
         <label for="sortby-select">Sort by</label>
       </div>
       <div class="form-floating">
-        {{#select filterValue}}
-        <select class="form-select" id="filter-select" name="filterValue">
-          <option value="">None</option>
-          <optgroup label="NP">
-            <option value="Buster">Buster</option>
-            <option value="Arts">Arts</option>
-            <option value="Quick">Quick</option>
-          </optgroup> 
-          <optgroup label="Class">
-            <option value="Saber">Saber</option>
-            <option value="Archer">Archer</option>
-            <option value="Lancer">Lancer</option>
-            <option value="Rider">Rider</option>
-            <option value="Caster">Caster</option>
-            <option value="Assassin">Assassin</option>
-            <option value="Berserker">Berserker</option>
-            <option value="Ruler">Ruler</option>
-            <option value="Avenger">Avenger</option>
-            <option value="Mooncaner">Mooncancer</option>
-            <option value="Foreigner">Foreigner</option>
-            <option value="Alter ego">Alter ego</option>
-            <option value="Pretender">Pretender</option>
-          </optgroup>
+        {{#select npCard}}
+        <select class="form-select" id="np-card-select" name="npCard">
+          <option value="">All</option>
+          <option value="Buster">Buster</option>
+          <option value="Arts">Arts</option>
+          <option value="Quick">Quick</option>
         </select>
         {{/select}}
-        <label for="filter-select">Filter</label>
+        <label for="np-card-select">NP Card</label>
+      </div>
+      <div class="form-floating">
+        {{#select servantClass}}
+        <select class="form-select" id="servant-class-select" name="servantClass">
+          <option value="">All</option>
+          <option value="Saber">Saber</option>
+          <option value="Archer">Archer</option>
+          <option value="Lancer">Lancer</option>
+          <option value="Rider">Rider</option>
+          <option value="Caster">Caster</option>
+          <option value="Assassin">Assassin</option>
+          <option value="Berserker">Berserker</option>
+          <option value="Ruler">Ruler</option>
+          <option value="Avenger">Avenger</option>
+          <option value="Mooncaner">Mooncancer</option>
+          <option value="Foreigner">Foreigner</option>
+          <option value="Alter ego">Alter ego</option>
+          <option value="Pretender">Pretender</option>
+        </select>
+        {{/select}}
+        <label for="servant-class-select">Class</label>
       </div>
       <button type="submit" id="go-btn" class="btn btn-primary rounded-3 align-self-center">GO!</button>
     </div>

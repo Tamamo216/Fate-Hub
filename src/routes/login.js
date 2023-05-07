@@ -21,12 +21,16 @@ router.post("/", passport.authenticate("local", {
   }
 });
 router.get("/oauth2/google", passport.authenticate("google"));
-router.get("/oauth2/google/callback", passport.authenticate("google", {failureRedirect: "/login"}), (req,res,next) => {
+router.get("/oauth2/google/callback", passport.authenticate("google", {
+  failureRedirect: "/login",
+  failureMessage: true
+}), (req,res,next) => {
   res.redirect("/servants");
 });
 router.get("/oauth2/microsoft", passport.authenticate("microsoft",{prompt: "select_account"}));
 router.get("/oauth2/microsoft/callback", passport.authenticate("microsoft", {
-  failureRedirect: "/login"
+  failureRedirect: "/login",
+  failureMessage: true
 }), (req,res) => {
   res.redirect("/servants");
 });

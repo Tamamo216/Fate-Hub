@@ -6,6 +6,7 @@ const userRoute = require("./user");
 const myServantRoute = require("./my_servants");
 const logoutRoute = require("./logout");
 const insertServantsRoute = require("./insert_servants_to_DB");
+const humanVerifyRoute = require("./human_verify");
 function isAuthenticated(req,res,next) {
   if (req.session.passport) {
     if (!req.user) {
@@ -26,7 +27,13 @@ function isAuthenticated(req,res,next) {
 }
 
 route = (app) => {
-  app.use("/", simpleRoute);
+  app.use("/human-verify", humanVerifyRoute);
+  app.use((req,res,next) => {
+    if (req.cookies["human-verify"] === undefined)
+      res.redirect("/human-verify");
+    else
+      next();
+  });
   app.use("/login", loginRoute);
   app.use("/register", registerRoute);
   app.use("/insert-servants", insertServantsRoute);
@@ -34,5 +41,6 @@ route = (app) => {
   app.use("/servants", isAuthenticated, servantRoute);
   app.use("/user/my-servants", isAuthenticated, myServantRoute);
   app.use("/logout", logoutRoute);
+  app.use("/", simpleRoute);
 };
 module.exports = route;

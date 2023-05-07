@@ -13,28 +13,28 @@ module.exports = {
 
   getUnsummonedServants: async (userId, search, filter) => {
     search = `%${search}%`;
-    const filterValue = `%${filter.value}%`;
+    const npCard = `%${filter.npCard}%`;
+    const servantClass = `%${filter.servantClass}%`;
     const query = "SELECT id, name, avatar, class, np_card\
                    FROM servants s\
                    WHERE NOT EXISTS (\
                     SELECT 1 FROM my_servants ms\
                     WHERE ms.servant_id = s.id\
                     AND ms.user_id = ${userId}) AND s.name ILIKE ${search}\
-                    AND s.${filter.field:name} ILIKE ${filterValue}";
-    return db.manyOrNone(query, {userId, search, filter, filterValue});
+                    AND s.np_card ILIKE ${npCard} AND s.class ILIKE ${servantClass}";
+    return db.manyOrNone(query, {userId, search, npCard, servantClass});
   },
 
   getSummonedServants: async (userId, search, filter) => {
     search = `%${search}%`;
-    const filterValue = `%${filter.value}%`;
     const query = "SELECT s.id, s.name, s.avatar, s.class, s.np_card,\
                    ms.servant_level, ms.np_level,ms.atk, ms.hp, ms.fou_atk,\
                    ms.fou_hp, ms.bond_lv, ms.favorite\
                    FROM servants s JOIN my_servants ms\
                    ON s.id = ms.servant_id\
                    WHERE ms.user_id = ${userId} AND s.name ILIKE ${search}\
-                   AND s.${filter.field:name} ILIKE ${filterValue}";
-    return db.manyOrNone(query, {userId, search, filter, filterValue});
+                   AND s.np_card = ${filter.npCard} AND s.class = ${filter.servantClass}";
+    return db.manyOrNone(query, {userId, search, filter});
   },
 
   updateFavoriteServants: (servantsId, userId) => {

@@ -6,7 +6,7 @@ const User = require("../models/postgres/user");
 const bcrypt = require("bcrypt");
 const path = require("path");
 require("dotenv").config({path: path.resolve(process.cwd(), "src/.env")});
-const hostDomain = (process.argv[2] === "production") ? `https://${process.env.HOST_DOMAIN}` : "http://localhost";
+const hostDomain = (process.argv[2] === "production") ? `https://${process.env.HOST_DOMAIN}` : "http://localhost:8080";
 
 function localVerify(username, password, done) {
   User.findUserBy("username", username)
@@ -53,7 +53,8 @@ function microsoftVerify(accessToken, refreshToken, profile, done) {
           return done(null,user);
         }
         catch (err) {
-          console.log(err);
+          if (err.includes("email"))
+            return done(null, false, {msg: "The email of this account is already taken"})
           return done(null, false, {msg: "Something went wrong. Cannot sign in your Microsoft account"});
         }
       }

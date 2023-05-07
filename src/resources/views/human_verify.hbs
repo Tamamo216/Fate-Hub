@@ -1,0 +1,19 @@
+<div class="d-flex mx-auto mt-4" style="width: 50%; height: 400px;">
+  <div id="turnstile-wrapper" class="rounded-start">
+    <h1 style="font-family: 'Oswald', sans-serif; font-size: 2em;">Prove that you are not a robot</h1>
+    <div class="cf-turnstile d-flex justify-content-center" data-sitekey="0x4AAAAAAAEfa6SzhklrUWjX" data-callback="tokenVerify"></div>
+  </div>
+  <img src="/img/saber_alter_bot_guard.webp" class="img-fluid rounded-end" alt="saber-alter-bot-guard">
+<script>
+  async function tokenVerify(token) {
+    const response = await fetch("/human-verify", {
+      method: "POST",
+      headers: {"Content-type" : "application/json"},
+      body: JSON.stringify({token})
+    });
+    if (response.status === 200)
+      window.location.href = "/";
+    else if (response.status === 400)
+      alert("You failed to pass the human verification test")
+  }
+</script>

@@ -8,20 +8,18 @@ module.exports = {
     let search = "";
     let order = "class";
     const filter = {
-      field: "class",
-      value: ""
+      npCard: "",
+      servantClass: ""
     }
     if (Object.keys(req.query).length > 0) {
       if (req.query.hasOwnProperty("search"))
         search = req.query.search;
       if (req.query.hasOwnProperty("order"))
         order = req.query.order;
-      if (req.query.hasOwnProperty("filterField")) {
-        filter.field = req.query.filterField;
-        if (filter.field === "np")
-          filter.field += "_card";
-        filter.value =req.query.filterValue;
-      }
+      if (req.query.hasOwnProperty("npCard"))
+        filter.npCard = req.query.npCard;
+      if (req.query.hasOwnProperty("servantClass"))
+        filter.servantClass = req.query.servantClass;
     }
    MyServants.getSummonedServants(userId, search, filter)
     .then((servants) => {
@@ -34,7 +32,7 @@ module.exports = {
           }
         });
       }
-      res.render("my_servants/homepage", {servants, order, filterValue: filter.value, displayName});
+      res.render("my_servants/homepage", {servants, order, npCard: filter.npCard, servantClass: filter.servantClass, displayName});
     })
     .catch((err) => next(err));
   },
@@ -45,20 +43,18 @@ module.exports = {
     let search = "";
     let order = "class";
     const filter = {
-      field: "class",
-      value: ""
+      npCard: "",
+      servantClass: ""
     }
     if (Object.keys(req.query).length > 0) {
-      if(req.query.hasOwnProperty("search"))
+      if (req.query.hasOwnProperty("search"))
         search = req.query.search;
       if (req.query.hasOwnProperty("order"))
         order = req.query.order;
-      if (req.query.hasOwnProperty("filterField")) {
-        filter.field = req.query.filterField;
-        if (filter.field === "np")
-          filter.field += "_card";
-        filter.value = req.query.filterValue;
-      }
+      if (req.query.hasOwnProperty("npCard"))
+        filter.npCard = req.query.npCard;
+      if (req.query.hasOwnProperty("servantClass"))
+        filter.servantClass = req.query.servantClass;
     }
     MyServants.getUnsummonedServants(userId, search, filter)
       .then((servants) => {
@@ -71,7 +67,7 @@ module.exports = {
             }
           });
         }
-        res.render("my_servants/add_servant", {servants, order, filterValue: filter.value, displayName});
+        res.render("my_servants/add_servant", {servants, order, npCard: filter.npCard, servantClass: filter.servantClass, displayName});
       })
       .catch((err) => next(err));
   },
@@ -94,20 +90,18 @@ module.exports = {
     let search = "";
     let order = "class";
     const filter = {
-      field: "class",
-      value: ""
+      npCard: "",
+      servantClass: ""
     }
     if (Object.keys(req.query).length > 0) {
       if (req.query.hasOwnProperty("search"))
         search = req.query.search;
       if (req.query.hasOwnProperty("order"))
         order = req.query.order;
-      if (req.query.hasOwnProperty("filterField")) {
-        filter.field = req.query.filterField;
-        if (filter.field === "np")
-          filter.field += "_card";
-        filter.value = req.query.filterValue;
-      }
+      if (req.query.hasOwnProperty("npCard"))
+        filter.npCard = req.query.npCard;
+      if (req.query.hasOwnProperty("servantClass"))
+        filter.servantClass = req.query.servantClass;
     }
     MyServants.getSummonedServants(userId, search, filter)
       .then((servants) => {
@@ -120,7 +114,7 @@ module.exports = {
             }
           });
         }
-        res.render("my_servants/delete_servant", {servants, order, filterValue: filter.value, displayName});
+        res.render("my_servants/delete_servant", {servants, order, npCard: filter.npCard, servantClass: filter.servantClass, displayName});
       })
       .catch((err) => next(err));
   },

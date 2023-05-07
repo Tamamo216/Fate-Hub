@@ -32,8 +32,5 @@ const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = Object.fromEntries(new FormData(form));
-  const selectedFilter = document.querySelector("#filter-select option:checked");
-  if (selectedFilter.value !== "")
-    formData.filterField = selectedFilter.parentElement.label.toLowerCase();
   window.location.search = new URLSearchParams(formData);
 });

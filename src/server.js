@@ -1,6 +1,7 @@
 const express = require("express");
 const hbs = require("express-handlebars");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 const routes = require("./routes/index");
 // connect to postgreSQL database
@@ -23,6 +24,7 @@ app.set("views", path.join(__dirname, "resources", "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
