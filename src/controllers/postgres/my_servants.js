@@ -167,8 +167,8 @@ module.exports = {
     MyServants.getServantDetails(servantId, userId)
       .then((myServant) => {
         myServant.img_details = "/img/" + myServant.img_details;
-        const levelingCost = utils.levelingCostCacl(myServant);
-        const qpCost = utils.skillsQPCostCacl(myServant.skill1_lv, myServant.skill2_lv, myServant.skill3_lv);
+        const levelingCost = utils.levelingCostCalc(myServant);
+        const qpCost = utils.skillsQPCostCalc(myServant.skill1_lv, myServant.skill2_lv, myServant.skill3_lv);
         levelingCost.forEach((e) => {
           e.requiredQP = utils.separateByThousand(e.requiredQP);
         });

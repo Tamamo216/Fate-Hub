@@ -149,7 +149,7 @@ module.exports = {
     return number;
   },
 
-  levelingCostCacl: (servantInfo) => {
+  levelingCostCalc: (servantInfo) => {
     let fiveStarExpCardUsed = 0;
     let fourStarExpCardUsed = 0;
     let qpUsed = 0;
@@ -187,7 +187,7 @@ module.exports = {
     return result;
   },
 
-  skillsQPCostCacl: (skill1, skill2, skill3) => {
+  skillsQPCostCalc: (skill1, skill2, skill3) => {
     let qpCost = {
       skill1: 0,
       skill2: 0,
