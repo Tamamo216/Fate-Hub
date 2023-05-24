@@ -29,7 +29,7 @@ function googleVerify(accessToken, refreshToken, profile, done) {
       if (!user) {
         try {
           const userId = await User.createUserWithExternalAccount(profile);
-          const user = await User.findUserBy("id", userId);
+          const user = await User.findUserBy("id", userId.id);
           return done(null, user);
         }
         catch (err) {

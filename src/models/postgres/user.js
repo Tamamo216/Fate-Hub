@@ -24,8 +24,12 @@ module.exports = {
   },
 
   createUser: (user) => {
-    return db.one("INSERT INTO users(username,password,email,gender,nationality,display_name) \
+    return db.tx(async t => {
+      const userId = await t.one(
+    "INSERT INTO users(username,password,email,gender,nationality,display_name) \
     VALUES(${username},${hashedPassword},${email},${gender},${nationality},${displayName}) RETURNING id", user);
+      await t.none("INSERT INTO user_saint_quartz_details(user_id) VALUES(${id})", userId);
+    });
   },
 
   async createUserWithExternalAccount(profile) {
@@ -37,7 +41,6 @@ module.exports = {
       nationality: "",
       displayName: profile.displayName,
     };
-    const userId = await this.createUser(user);
     const externalAccountProfile = {
       id: profile.id,
       provider: profile.provider,
@@ -46,8 +49,14 @@ module.exports = {
       familyName: profile.name.familyName,
       givenName: profile.name.givenName,
     };
-    await db.none("INSERT INTO external_accounts (profile_id,provider,email,display_name,family_name,given_name,user_id) VALUES (${profile.id},${profile.provider},${profile.email},${profile.displayName},${profile.familyName},${profile.givenName},${userId.id})", {userId, profile: externalAccountProfile});
-    return userId.id;
+    return db.tx(async t => {
+      const userId = await t.one(
+      "INSERT INTO users(username,password,email,gender,nationality,display_name) \
+      VALUES(${username},${hashedPassword},${email},${gender},${nationality},${displayName}) RETURNING id", user);
+      await t.none("INSERT INTO user_saint_quartz_details(user_id) VALUES(${id})", userId);
+      await t.none("INSERT INTO external_accounts (profile_id,provider,email,display_name,family_name,given_name,user_id) VALUES (${profile.id},${profile.provider},${profile.email},${profile.displayName},${profile.familyName},${profile.givenName},${userId.id})", {userId, profile: externalAccountProfile});
+      return userId.id;
+    });
   },
 
   updateUser: (user) => {

@@ -10,7 +10,9 @@ module.exports = {
       console.log(err);
     } 
   },
-
+  findServant: function(servantId, userId) {
+    return db.oneOrNone("SELECT * FROM my_servants WHERE servant_id = ${servantId} AND user_id = ${userId}", {servantId, userId});
+  },
   getUnsummonedServants: async (userId, search, filter) => {
     search = `%${search}%`;
     const npCard = `%${filter.npCard}%`;

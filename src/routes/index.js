@@ -7,6 +7,7 @@ const myServantRoute = require("./my_servants");
 const logoutRoute = require("./logout");
 const insertServantsRoute = require("./insert_servants_to_DB");
 const humanVerifyRoute = require("./human_verify");
+
 function isAuthenticated(req,res,next) {
   if (req.session.passport) {
     if (!req.user) {
@@ -37,9 +38,9 @@ route = (app) => {
   app.use("/login", loginRoute);
   app.use("/register", registerRoute);
   app.use("/insert-servants", insertServantsRoute);
-  app.use("/user", isAuthenticated, userRoute);
   app.use("/servants", isAuthenticated, servantRoute);
   app.use("/user/my-servants", isAuthenticated, myServantRoute);
+  app.use("/user", isAuthenticated, userRoute);
   app.use("/logout", logoutRoute);
   app.use("/", simpleRoute);
 };
