@@ -17,8 +17,9 @@ module.exports = {
     search = `%${search}%`;
     const npCard = `%${filter.npCard}%`;
     const servantClass = `%${filter.servantClass}%`;
-    const query = "SELECT id, name, avatar, class, np_card\
-                   FROM servants s\
+    const query = "SELECT s.id, name, avatar, class, np_card, atk, hp, wl.id as wishlist_id \
+                   FROM servants s LEFT JOIN wishlists wl \
+                   ON s.id = wl.servant_id AND wl.user_id = ${userId} \
                    WHERE NOT EXISTS (\
                     SELECT 1 FROM my_servants ms\
                     WHERE ms.servant_id = s.id\
@@ -39,6 +40,20 @@ module.exports = {
                    WHERE ms.user_id = ${userId} AND s.name ILIKE ${search}\
                    AND s.np_card ILIKE ${npCard} AND s.class ILIKE ${servantClass}";
     return db.manyOrNone(query, {userId, search, npCard, servantClass});
+  },
+  getRollableServants: function (userId, search, filter) {
+    search = `%${search}%`;
+    const npCard = `%${filter.npCard}%`;
+    const servantClass = `%${filter.servantClass}%`;
+    const query = "SELECT s.id, s.name, s.class, s.avatar, s.atk, s.hp, s.np_card, wl.id as wishlist_id \
+    FROM servants s LEFT JOIN wishlists wl \
+    ON s.id = wl.servant_id AND wl.user_id = ${userId} \
+    WHERE NOT EXISTS (\
+      SELECT 1 FROM my_servants ms \
+      WHERE ms.servant_id = s.id AND ms.user_id = ${userId} AND ms.np_level = 5) \
+      AND s.name ILIKE ${search} AND s.class ILIKE ${servantClass} \
+      AND s.np_card ILIKE ${npCard}";
+    return db.manyOrNone(query, {userId, search, servantClass, npCard});
   },
 
   updateFavoriteServants: (servantsId, userId) => {

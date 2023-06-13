@@ -1,4 +1,5 @@
 const User = require("../../models/postgres/user");
+const RollingHist = require("../../models/postgres/rolling_histories");
 const bcrypt = require("bcrypt");
 
 module.exports = {
@@ -160,5 +161,33 @@ module.exports = {
         res.status(302).json({msg: "Account was successfully removed", redirect: "/login"});
       })
       .catch((err) => next(err));
+  },
+  loadRollingHistPage: function(req,res,next) {
+    const userId = req.user.id;
+    const displayName = req.user["display_name"];
+    const page = (req.query.page !== undefined) ? parseInt(req.query.page) : 1;
+    const rowPerPage = 5;
+    Promise.all([
+      RollingHist.getRollingHistories(userId, page),
+      RollingHist.getTotalRecord(userId)
+    ])
+      .then(([rollingHistories, totalRecord]) => {
+        rollingHistories.forEach(e => {
+          e["first_roll_date"] = e["first_roll_date"].toLocaleString();
+          e["last_roll_date"] = e["last_roll_date"].toLocaleString();
+          e["isAcquired"] = (e.latest_roll_status === 'successful') ? true : false;
+          if (e["np_level"] === null)
+            e["np_level"] = 0;
+        });
+        const totalPage = Math.ceil(totalRecord.count/rowPerPage);
+        const prevPage = (page-1 === 0) ? 1 : page-1;
+        const nextPage = (page+1 > totalPage) ? totalPage : page+1;
+        res.render("user/rolling_histories", {
+          rollingHistories, displayName, page, prevPage, nextPage, totalPage
+        });
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 };

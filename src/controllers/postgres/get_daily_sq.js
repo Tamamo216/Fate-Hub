@@ -24,37 +24,52 @@ async function checkDailySQLimit(userId) {
 
 module.exports = {
   getDailySQ: async function(req,res,next) {
-    if (req.cookies["daily-sq-cooldown"] !== undefined) {
-      res.status(200).json({status: "cooldown", msg: "You have already received daily saint quartz three times today and need to wait until the next day"});
-      return;
-    }
-    const onCooldow = await checkDailySQLimit(req.user.id);
-    if (onCooldow) {
-      const nextDay = new Date();
-      nextDay.setDate(nextDay.getDate()+1);
-      nextDay.setHours(0,0,0);
-      res.cookie("daily-sq-cooldown", "true", {expires: nextDay});
-      res.status(200).json({status: "cooldown", msg: "You have already received daily saint quartz three times today and need to wait until the next day"});
-      return;
-    }
+    try {
+      if (req.cookies["daily-sq-cooldown"] !== undefined) {
+        res.status(200).json({status: "cooldown", msg: "You have already received daily saint quartz three times today and need to wait until the next day"});
+        return;
+      }
+      const userId = req.user.id;
+      let onCooldow = await checkDailySQLimit(userId);
+      if (onCooldow) {
+        const nextDay = new Date();
+        nextDay.setDate(nextDay.getDate()+1);
+        nextDay.setHours(0,0,0);
+        res.cookie("daily-sq-cooldown", "true", {expires: nextDay});
+        res.status(200).json({status: "cooldown", msg: "You have already received daily saint quartz three times today and need to wait until the next day"});
+        return;
+      }
 
-    const random = Math.random();
-    let result = -1;
-    if (random < 0.4)
-      result = 1;
-    else if (random < 0.7)
-      result = 2;
-    else if (random < 0.9)
-      result = 3;
-    else result = 4;
-    const sq_received = 30 * result;
-    const info = {
-      userId: req.user.id,
-      quantity: sq_received,
-      date_received: new Date()
+      const random = Math.random();
+      let result = -1;
+      if (random < 0.4)
+        result = 1;
+      else if (random < 0.7)
+        result = 2;
+      else if (random < 0.9)
+        result = 3;
+      else result = 4;
+      const sq_received = 30 * result;
+      const info = {
+        userId: userId,
+        quantity: sq_received,
+        date_received: new Date()
+      }
+      await Promise.all([
+        UserSQ.addUserSQ(info),
+        dailySQGainHistories.insert(info)
+      ]);  
+      onCooldow = await checkDailySQLimit(userId);
+      if (onCooldow) {
+        const nextDay = new Date();
+        nextDay.setDate(nextDay.getDate()+1);
+        nextDay.setHours(0,0,0);
+        res.cookie("daily-sq-cooldown", "true", {expires: nextDay});
+      }
+      res.status(200).json({status: "success", msg: `You just got ${sq_received}`});
     }
-    await UserSQ.addUserSQ(sq_received);
-    await dailySQGainHistories.insert(info);
-    res.status(200).json({status: "success", msg: `You just got ${sq_received}`});
+    catch(err) {
+      next(err);
+    }
   }
 }

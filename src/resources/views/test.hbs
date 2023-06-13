@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center mt-4" id="test-content" data-servantid="334">
+  <button type="button" class="btn btn-outline-primary" onclick="getSQ()">Get Saint Quartz</button>
+  <button type="button" class="btn btn-outline-success" onclick="purchaseServant()" >Purchase servant</button>
+</div>
+<script>
+  function purchaseServant() {
+    const servantId = document.getElementById("test-content").dataset.servantid;
+    fetch("/test", {
+      method: "POST",
+      headers: {"Content-type": "application/json"},
+      body: JSON.stringify({servantId})
+    })
+    .then((response) => {
+      response.json().then(data => alert(data.msg));
+    })
+    .catch(err => console.log(err));
+  }
+  function getSQ() {
+    fetch("/user/daily-sq", {
+      method: "GET"
+    })
+    .then((response) => {
+      response.json().then(data => alert(data.msg));
+    })
+    .catch(err => console.log(err));
+  }
+</script>

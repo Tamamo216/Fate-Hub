@@ -1,0 +1,291 @@
+<div class="content-wrapper">
+  <div class="row px-3 border-bottom border-danger border-2">
+    <div class="col-4 p-2">
+      {{#with sqInfo}}
+      <div class="row justify-content-center">
+        <div class="col-5 px-2 d-flex flex-column">
+          <span class="sq-label">Current SQ</span>
+          <div class="sq-info">
+            <img src="/img/saint_quartz.png" alt="saint-quartz-img">
+            {{current_sq}}
+          </div>
+          <span class="sq-label">SQ have used</span>
+          <div class="sq-info">
+            <img src="/img/saint_quartz.png" alt="saint-quartz-img">
+            {{sq_have_used}}
+          </div>
+        </div>
+        <div class="col-5 px-2 d-flex flex-column">
+          <span class="sq-label">Most SQ used for a servant</span>
+          <div class="sq-info">
+            <img src="/img/saint_quartz.png" alt="saint-quartz-img">
+            {{most_sq_per_ser}}
+          </div>
+          <span class="sq-label">Average SQ per servant</span>
+          <div class="sq-info">
+            <img src="/img/saint_quartz.png" alt="saint-quartz-img">
+            {{avg_sq_per_ser}}
+          </div>
+        </div>
+      </div>
+      {{/with}}
+    </div>
+    <div class="col-5 p-3 d-flex flex-column justify-content-end">
+      <form method="GET">
+        <div class="d-flex align-items-end mb-3">
+          <div class="input-group me-2">
+            <input type="text" class="form-control" placeholder="Search by servant name..." name="q">
+            <button type="submit" class="btn btn-outline-primary">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <div class="form-floating me-2">
+            <select class="form-select" id="np-card-select" name="np" style="width: fit-content">
+              <option value="">All</option>
+              <option value="Buster">Buster</option>
+              <option value="Arts">Art</option>
+              <option value="Quick">Quick</option>
+            </select>
+            <label for="np-card-select">NP card</label>
+          </div>
+          <div class="form-floating">
+            <select class="form-select" id="sort-by-select" name="order" style="width: fit-content;">
+              <option value="id">ID</option>
+              <option value="name">Name</option>
+              <option value="atk">ATK</option>
+              <option value="hp">HP</option>
+            </select>
+            <label for="sort-by-select">Sort</label>
+          </div>
+        </div>
+        {{#unless query}}
+        <div class="d-flex justify-content-evenly">
+          <div class="servant-class-page active" data-target="Saber-ser-list">
+            <img src="/img/class avatar/Saber.webp" alt="saber-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Archer-ser-list">
+            <img src="/img/class avatar/Archer.webp" alt="archer-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Lancer-ser-list">
+            <img src="/img/class avatar/Lancer.webp" alt="lancer-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Rider-ser-list">
+            <img src="/img/class avatar/Rider.webp" alt="Rider-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Caster-ser-list">
+            <img src="/img/class avatar/Caster.webp" alt="caster-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Assassin-ser-list">
+            <img src="/img/class avatar/Assassin.webp" alt="assassin-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Berserker-ser-list">
+            <img src="/img/class avatar/Berserker.webp" alt="Berserker-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Ruler-ser-list">
+            <img src="/img/class avatar/Ruler.webp" alt="ruler-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Avenger-ser-list">
+            <img src="/img/class avatar/Avenger.webp" alt="avenger-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Moon Cancer-ser-list">
+            <img src="/img/class avatar/MoonCancer.webp" alt="mooncancer-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Foreigner-ser-list">
+            <img src="/img/class avatar/Foreigner.webp" alt="foreigner-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Alter Ego-ser-list">
+            <img src="/img/class avatar/Alterego.webp" alt="alterego-class-avt">
+          </div>
+          <div class="servant-class-page" data-target="Pretender-ser-list">
+            <img src="/img/class avatar/Pretender.webp" alt="pretender-class-avt">
+          </div>
+        </div>
+        {{/unless}}
+      </form>
+    </div>
+    <div class="col-3 p-2 d-flex flex-column justify-content-center align-items-center rounded-3" style="background-color: lightblue; box-shadow: -2px -2px 5px -1px rgba(0,0,0,0.49);">
+      <span style="font-family: 'Inter', sans-serif; margin-bottom: 10px; text-align: center; color: slateblue;">
+        Click the button below to earn daily saint quartz with random quantity. You can only receive daily saint quartz three times a day 
+      </span>
+      {{#unless onCooldown}}
+      <button type="button" class="btn btn-outline-success" id="get-daily-sq-btn">
+        Get daily Saint Quartz
+      </button>
+      {{else}}
+      <button type="button" class="btn btn-outline-success" id="get-daily-sq-btn" disabled>
+        Get daily Saint Quartz
+      </button>
+      <span style="color: darkred;">
+        You are on cooldown. Remaining time: <span id="cd-remain-time"></span>
+      </span>
+      {{/unless}}
+    </div>
+  </div>
+  <div class="row pt-3 flex-grow-1" style="min-height: 0;">
+    <div class="col-9 h-100">
+      {{#if query}}
+      <div class="row row-cols-6 g-2 servants-purchase-list">
+        {{#each servants}}
+        <div class="col">
+          <div class="servant-purchase-items" onclick="goToDetailsPage('{{id}}')">
+            <img class="servant-avatar" src="{{avatar}}" alt="servant-avt">
+            <div class="servant-name">{{name}}</div>
+            <div class="d-flex justify-content-center">
+              <span style="margin-right: 10px; color: crimson; font-weight: 500;">
+                ATK: {{minATK}}
+              </span>
+              <span style="color: seagreen; font-weight: 500;">
+                HP: {{minHP}}
+              </span>
+            </div>
+            <div class="d-flex justify-content-center">
+              <img src="/img/saint_quartz.png" alt="sq-img" style="width: 20px; height: 20px; margin-right: 10px;">
+              30
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            {{#unless wishlist_id}}
+            <button type="button" class="btn btn-primary add-wishlist-btn" data-servantid="{{id}}">
+              Add to wishlist
+            </button>
+            {{else}}
+            <button type="button" class="btn btn-secondary" disabled>
+              Added to wishlist
+            </button>
+            {{/unless}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{else}}
+        {{#servantsByClass servantsByClass}}
+        <div class="row row-cols-6 g-2 d-none servants-purchase-list" id="{{className}}-ser-list">
+          {{#each servants}}
+          <div class="col">
+            <div class="servant-purchase-items" onclick="goToDetailsPage('{{id}}')">
+              <img class="servant-avatar" src="{{avatar}}" alt="servant-avt">
+              <div class="servant-name">{{name}}</div>
+              <div class="d-flex justify-content-center">
+                <span style="margin-right: 10px; color: crimson; font-weight: 500;">
+                  ATK: {{minATK}}
+                </span>
+                <span style="color: seagreen; font-weight: 500;">
+                  HP: {{minHP}}
+                </span>
+              </div>
+              <div class="d-flex justify-content-center">
+                <img src="/img/saint_quartz.png" alt="sq-img" style="width: 20px; height: 20px; margin-right: 10px;">
+                30
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              {{#unless wishlist_id}}
+              <button type="button" class="btn btn-primary add-wishlist-btn" data-servantid="{{id}}">
+                Add to wishlist
+              </button>
+              {{else}}
+              <button type="button" class="btn btn-secondary" disabled>
+                Added to wishlist
+              </button>
+              {{/unless}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/servantsByClass}}
+      {{/if}}
+    </div>
+    <div class="col-3 h-100 d-flex flex-column">
+      <div id="wishlist-unfinished-purchases-nav">
+        <ul>
+          <li class="nav-tab active" data-target="wishlists">
+            wishlist
+          </li>
+          <li class="nav-tab" data-target="unfinished-purchases-list">
+            latest failed rolls
+          </li>
+        </ul>
+      </div>
+      <div id="wishlists" class="d-none">
+        {{#each wishlist}}
+        <div class="wishlist-info">
+          <div class="d-flex align-items-center mb-2">
+            <img src="{{avatar}}" alt="servant-avt">
+            <span class="servant-name">
+              {{name}}
+            </span>
+          </div>
+          <div class="d-flex">
+            <span class="details-info">Date added: {{added_date}}</span>
+          </div>
+          <div class="d-flex">
+            <span class="details-info">Saint Quartz used: {{total_cost}}</span>
+          </div>
+          <div class="d-flex mt-2 px-2 justify-content-between align-items-center">
+            <button id="wishlist-remove-btn" class="btn btn-danger" data-servantid="{{servant_id}}" style="font-size: 0.8em;">
+              Remove from wishlist
+            </button>
+            <a href="/servants/purchase/{{servant_id}}" style="text-decoration: none;">
+              Get this servant
+            </a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <div id="unfinished-purchases-list" class="d-none">
+        {{#each unfinishedPurchases}}
+        <div class="payment-info">
+          <div class="d-flex align-items-center mb-2" style="height: 40%;">
+            <img src="{{avatar}}" alt="servant-avt">
+            <span class="servant-name">
+              {{name}}
+            </span>
+          </div>
+          <div class="d-flex">
+            <span class="details-info">Roll times: {{roll_times}}</span>
+            <span class="details-info">Total cost: {{total_cost}}</span>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="details-info">
+              First roll date: {{first_roll_date}}
+            </span>
+            <span class="details-info">
+              Last roll date: {{last_roll_date}}
+            </span>
+          </div>
+          <div class="d-flex">
+            <span>Status: {{latest_roll_status}} <i class="fa-solid fa-circle-xmark"></i></span>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a href="/servants/purchase/{{id}}" style="text-decoration: none;">Go to the purchase page</a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="dailySQResultModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: rgb(33, 37, 41); color: lightcyan;">
+      <div class="modal-header">
+        <h1 class="modal-title" id="modalLabel" style=" font-family: 'Oswald', sans-serif;font-size: 24px; font-weight: 600;">
+          Daily Saint Quartz
+        </h1>
+      </div>
+      <div class="modal-body d-flex align-items-center">
+        <span id= "daily-sq-result-msg">
+          
+        </span>
+        {{#unless onCooldown}}
+        <img src="/img/saint_quartz.png" alt="sq-img" style="width: 24px; height: 24px; margin-left: 5px;">
+        {{/unless}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/servants_purchase.js"></script>

@@ -1,6 +1,6 @@
 {{#with myServant}}
-<div class="container mx-auto border border-2 rounded-2" style="height: 550px; width: 1000px;">
-  <div class="row border-bottom border-2 d-flex justify-content-between">
+<div class="d-flex flex-column mx-auto mt-3 border border-2 rounded-2" style="height: 560px;; width: 1000px;">
+  <div class="row border-bottom border-2 d-flex justify-content-between" style="background-color: mediumturquoise;">
     <div class="col-auto d-flex align-items-center">
       <a href="{{details_url}}">
         <img src="{{avatar}}" alt="servant-avt" style="width: 100px; height: 100px;">
@@ -13,7 +13,7 @@
       <button type="button" class="btn btn-outline-success rounded-4" style="font-size: 1.3em;" id="edit-btn">Edit</button>
     </div>
   </div>
-  <div class="row g-4 p-3">
+  <div class="row p-3 flex-grow-1" style="min-height: 0; background-color: lavender;">
     <div class="col-9">
       <form action="/user/my-servants/details/{{servant_id}}">
         <div class="row mb-3">
@@ -129,7 +129,7 @@
         </div>
       </form>
     </div>
-    <div class="col-3 border border-primary border-2 rounded-2 p-2">
+    <div class="col-3 border border-primary border-2 rounded-2 p-2" style="background-color: white;">
       <div class="d-flex justify-content-center mb-3">
         <span class="myservant-star">
           <i class="fa-solid fa-star"></i>

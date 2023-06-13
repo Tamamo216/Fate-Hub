@@ -1,0 +1,81 @@
+<div id="rolling_hists_wrapper" class="table-responsive">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <td>Servant</td>
+        <td>Total cost</td>
+        <td>Roll times</td>
+        <td>NP level</td>
+        <td>First roll date</td>
+        <td>Last roll date</td>
+        <td>Latest roll status</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each rollingHistories}}
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <img class="servant-avt" src="{{avatar}}" alt="servant-avt">
+            <span class="servant-name">{{name}}</span>
+          </div>
+        </td>
+        <td>
+          {{total_cost}}
+          <img style="height: 1.2em; width: auto;" src="/img/saint_quartz.png" alt="saint-quartz-img">
+        </td>
+        <td>
+          {{roll_times}}
+        </td>
+        <td>
+          {{np_level}}
+        </td>
+        <td>
+          {{first_roll_date}}
+        </td>
+        <td>
+          {{last_roll_date}}
+        </td>
+        <td>
+          {{#if isAcquired}}
+          {{latest_roll_status}}
+          <i class="fa-solid fa-circle-check" style="color: green;"></i>
+          {{else}}
+          {{latest_roll_status}}
+          <i class="fa-solid fa-circle-xmark"></i>
+          {{/if}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination justify-content-end px-2">
+      <li class="page-item">
+        <a class="page-link" href="/user/rolling-histories?page=1">
+          <i class="fa-solid fa-angles-left"></i>
+        </a> 
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="/user/rolling-histories?page={{prevPage}}">
+          <i class="fa-solid fa-chevron-left"></i>
+        </a> 
+      </li>
+      {{#generatePageLink page totalPage}}
+      <li class="page-item">
+        <a class="page-link" href="/user/rolling-histories?page={{currentPage}}">{{currentPage}}</a>
+      </li>
+      {{/generatePageLink}}
+      <li class="page-item">
+        <a class="page-link" href="/user/rolling-histories?page={{nextPage}}">
+          <i class="fa-solid fa-chevron-right"></i>
+        </a> 
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="/user/rolling-histories?page={{totalPage}}">
+          <i class="fa-solid fa-angles-right"></i>
+        </a> 
+      </li>
+    </ul>
+  </nav>
+</div>

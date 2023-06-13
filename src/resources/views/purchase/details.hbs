@@ -1,0 +1,109 @@
+<div class="mx-auto mt-3" style="width: 30%;">
+  <div class="d-flex w-100">
+    <div class="d-flex flex-column flex-grow-1 align-items-center">
+      <span class="sq-label">Current SQ</span>
+      <div class="sq-info">
+        <img src="/img/saint_quartz.png" alt="sq-img">
+        {{sqInfo.current_sq}}
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-grow-1 align-items-center">
+      <span class="sq-label">Total SQ used</span>
+      <div class="sq-info">
+        <img src="/img/saint_quartz.png" alt="sq-img">
+        {{rollingInfo.total_cost}}
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-grow-1 align-items-center">
+      <span class="sq-label">Roll times</span>
+      <div style="width: fit-content; padding: 5px 15px; margin: 10px 0; background-color: gainsboro; border: 2px solid coral; border-radius: 10px;">
+        {{rollingInfo.roll_times}}
+      </div>
+    </div>
+  </div>
+  <div id="purchase-details-wrapper">
+    {{#with servant}}
+    <div class="d-flex align-items-center">
+      <a href="{{details_url}}">
+        <img class="servant-avatar" src="{{avatar}}" alt="servant-avt">
+      </a>
+      <a href="{{details_url}}" style="text-decoration: none; text-align: center;">
+        <span class="servant-name">{{name}}</span>
+      </a>
+    </div>
+    <div class="d-flex mt-3">
+      <img src="/img/NP/{{np_card}}.webp" alt="NP-img" style="width: 60px; height: 60px;">
+      <div class="d-flex flex-column mx-3">
+        <span class="sq-label">ATK</span>
+        <div style="width: fit-content; background-color: crimson; color: white; padding: 5px 10px; border-radius: 5px; font-weight: 500;">
+          {{minATK}}
+        </div>
+      </div>
+      <div class="d-flex flex-column mx-3">
+        <span class="sq-label">HP</span>
+        <div style="width: fit-content; background-color: green; color: white; padding: 5px 10px; border-radius: 5px; font-weight: 500;">
+          {{minHP}}
+        </div>
+      </div>
+    </div>
+    {{/with}}
+    <div class="d-flex mt-3 p-2" id="roll-note">
+      <span>
+        Important: Keep in mind that you are not guaranteed to be able to possess the chosen servant in a single roll since the success rate is only 45%. Therefore, you may have to roll more than once to get the servant you want. Good luck!
+      </span>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <button type="button" class="btn btn-outline-success" id="roll-btn" style="flex-basis: 60%;">
+        Roll
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="rollResultModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: rgb(33, 37, 41); color: lightcyan;">
+      <div class="modal-header">
+        <h1 class="modal-title" id="modalLabel" style=" font-family: 'Oswald', sans-serif;font-size: 24px; font-weight: 600;">
+          Roll result
+        </h1>
+      </div>
+      <div class="modal-body d-flex align-items-center">
+        <span id= "roll-result-msg">
+          
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("roll-btn").addEventListener("click", async (event) => {
+  try {
+    const response = await fetch(window.location.pathname, {
+      method: "POST",
+      headers: {"Content-type": "application/json"},
+    });
+    const data = await response.json();
+    const modal = new bootstrap.Modal("#rollResultModal");
+    document.getElementById("roll-result-msg").innerText = data.msg;
+    document.getElementById("rollResultModal").addEventListener("hidden.bs.modal", (event) => {
+      if (response.status === 400) {
+        window.location.href = "/servants/purchase";
+      }
+      else if (response.status === 200) {
+        if (data.status === "success")
+          window.location.href = "/servants/purchase";
+        else
+          window.location.reload();
+      }
+    });
+    modal.show();
+  }
+  catch(err) {
+    console.log(err);
+  }
+});
+</script>

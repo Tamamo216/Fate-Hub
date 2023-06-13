@@ -17,3 +17,10 @@ input.form-control:focus, input.form-check-input:focus, select.form-select:focus
   padding: 10px;
   background-color: darkturquoise;
 }
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  padding: 10px;
+}

@@ -1,137 +1,138 @@
-<div id="myservant-navbar" class="mx-auto" style="width: 500px;">
-  <nav class="mb-3">
-    <ul class="nav justify-content-around">
-      <a class="nav-link active" href="/user/my-servants">My Servants</a>
-      <a class="nav-link" href="/user/my-servants/add-servant">Add Servants</a>
-      <a class="nav-link" href="/user/my-servants/remove-servants">Delete Servants</a>
-    </ul>
-  </nav>
-</div>
-<form style="width: 500px; margin-bottom: 30px; margin-inline: auto auto">
-  <div class="row">
-    <div class="col">
-      <div class="input-group">
-        <input type="text" class="form-control shadow-none" placeholder="Search by servant name..." name="search" value="">
-        <span class="input-group-text bg-success">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
-      </div>
-    </div>
+<div class="content-wrapper">
+  <div id="myservant-navbar" class="mx-auto" style="width: 500px;">
+    <nav class="mb-3">
+      <ul class="nav justify-content-around">
+        <a class="nav-link active" href="/user/my-servants">My Servants</a>
+        <a class="nav-link" href="/user/my-servants/remove-servants">Delete Servants</a>
+      </ul>
+    </nav>
   </div>
-  <div class="row mt-3">
-    <div class="col d-flex justify-content-between">
-      <div class="form-floating">
-        {{#select order}}
-        <select class="form-select" id="sortby-select" name="order">
-          <option value="id">ID</option>
-          <option value="name">Name</option>
-          <option value="class">Class</option>
-          <option value="servant_level">Servant level</option>
-          <option value="np_level">NP level</option>
-          <option value="atk">ATK</option>
-          <option value="hp">HP</option>
-          <option value="fou_atk">Fou ATK</option>
-          <option value="fou_hp">Fou HP</option>
-          <option value="bond_lv">Bond level</option>
-        </select>
-        {{/select}}
-        <label for="sortby-select">Sort by</label>
-      </div>
-      <div class="form-floating">
-        {{#select npCard}}
-        <select class="form-select" id="np-card-select" name="npCard">
-          <option value="">All</option>
-          <option value="Buster">Buster</option>
-          <option value="Arts">Arts</option>
-          <option value="Quick">Quick</option>
-        </select>
-        {{/select}}
-        <label for="NP-card-select">NP Card</label>
-      </div>
-      <div class="form-floating">
-        {{#select servantClass}}
-        <select class="form-select" id="servant-class-select" name="servantClass">
-          <option value="">All</option>
-          <option value="Saber">Saber</option>
-          <option value="Archer">Archer</option>
-          <option value="Lancer">Lancer</option>
-          <option value="Rider">Rider</option>
-          <option value="Caster">Caster</option>
-          <option value="Assassin">Assassin</option>
-          <option value="Berserker">Berserker</option>
-          <option value="Ruler">Ruler</option>
-          <option value="Avenger">Avenger</option>
-          <option value="Mooncaner">Mooncancer</option>
-          <option value="Foreigner">Foreigner</option>
-          <option value="Alter ego">Alter ego</option>
-          <option value="Pretender">Pretender</option>
-        </select>
-        {{/select}}
-        <label for="servant-class-select">Class</label>
-      </div>
-      <button type="submit" class="btn btn-primary rounded-3 align-self-center">GO!</button>
-    </div>
-  </div>
-</form>
-<div class="mt-3 container">
-  <div class="row gx-4">
-    <div class="col-8">
-      <div class="row row-cols-6 border border-2 rounded-3 g-2" style="min-height: 300px; max-height: 800px; overflow: auto;">
-        {{#unless servants}}
-        <div class="col-12 d-flex justify-content-center align-items-center">
-          <span class="empty-inform-text">
-            There is no servant in your Chaldea yet
+  <form style="width: 500px; margin-bottom: 30px; margin-inline: auto auto">
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <input type="text" class="form-control shadow-none" placeholder="Search by servant name..." name="search" value="">
+          <span class="input-group-text bg-success">
+            <i class="fa-solid fa-magnifying-glass"></i>
           </span>
         </div>
-        {{else}}
-          {{#each servants}}
-          <div class="col myservant-card" data-servantid={{id}} data-favorite="{{favorite}}">
-            {{#if sortInfo}}
-            <span class="sort-info">{{sortInfo.name}}: {{sortInfo.value}}</span>
-            {{/if}}
-            <div class="myservant-avt">
-              <a href="/user/my-servants/details/{{id}}">
-                <img class="myservant-avt-img" src="{{avatar}}" alt="servant-avatar">
-              </a>
-              {{#if favorite}}
-              <span class="favorite-servant-heart">
-                <i class="fa-solid fa-sun"></i>
-              </span>
-              {{/if}}
-            </div>
-            <span class="myservant-star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </span>
-            <div class="myservant-name">
-              <a href="/user/my-servants/details/{{id}}">{{name}}</a>
-            </div>
-          </div>
-          {{/each}}
-        {{/unless}}
-      </div>
-      <div class="d-flex justify-content-end mt-3">
-        <button type="button" class="btn btn-secondary rounded-3 me-3" id="cancel-btn" hidden>
-          Cancel
-        </button>
-        <button type="button" class="btn btn-success rounded-3" id="confirm-btn" hidden>
-          Confirm
-        </button>
       </div>
     </div>
-    <div class="col-3 d-flex flex-column">
-      <button type="button" class="btn btn-secondary fav-btn rounded-2 mb-2" id="add-fav-servants-btn">
-        Add favorite servants
-      </button>
-      <button type="button" class="btn btn-secondary fav-btn rounded-2" id="remove-fav-servant-btn">
-        Remove favorite servants
-      </button>
-      <div class="form-check mt-2">
-        <input type="checkbox" class="form-check-input" id="favorite-only">
-        <label class="form-check-label" for="favorite-only">Favorite servants only</label>
+    <div class="row mt-3">
+      <div class="col d-flex justify-content-between">
+        <div class="form-floating">
+          {{#select order}}
+          <select class="form-select" id="sortby-select" name="order">
+            <option value="id">ID</option>
+            <option value="name">Name</option>
+            <option value="class">Class</option>
+            <option value="servant_level">Servant level</option>
+            <option value="np_level">NP level</option>
+            <option value="atk">ATK</option>
+            <option value="hp">HP</option>
+            <option value="fou_atk">Fou ATK</option>
+            <option value="fou_hp">Fou HP</option>
+            <option value="bond_lv">Bond level</option>
+          </select>
+          {{/select}}
+          <label for="sortby-select">Sort by</label>
+        </div>
+        <div class="form-floating">
+          {{#select npCard}}
+          <select class="form-select" id="np-card-select" name="npCard">
+            <option value="">All</option>
+            <option value="Buster">Buster</option>
+            <option value="Arts">Arts</option>
+            <option value="Quick">Quick</option>
+          </select>
+          {{/select}}
+          <label for="NP-card-select">NP Card</label>
+        </div>
+        <div class="form-floating">
+          {{#select servantClass}}
+          <select class="form-select" id="servant-class-select" name="servantClass">
+            <option value="">All</option>
+            <option value="Saber">Saber</option>
+            <option value="Archer">Archer</option>
+            <option value="Lancer">Lancer</option>
+            <option value="Rider">Rider</option>
+            <option value="Caster">Caster</option>
+            <option value="Assassin">Assassin</option>
+            <option value="Berserker">Berserker</option>
+            <option value="Ruler">Ruler</option>
+            <option value="Avenger">Avenger</option>
+            <option value="Moon Caner">Mooncancer</option>
+            <option value="Foreigner">Foreigner</option>
+            <option value="Alter Ego">Alter ego</option>
+            <option value="Pretender">Pretender</option>
+          </select>
+          {{/select}}
+          <label for="servant-class-select">Class</label>
+        </div>
+        <button type="submit" class="btn btn-primary rounded-3 align-self-center">GO!</button>
+      </div>
+    </div>
+  </form>
+  <div class="container mt-3 flex-grow-1" style="min-height: 0;">
+    <div class="row h-100">
+      <div class="col-8 h-100">
+        <div class="row row-cols-6 border border-2 rounded-3 g-3" style="max-height: 100%; overflow: auto;">
+          {{#unless servants}}
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <span class="empty-inform-text">
+              There is no servant in your Chaldea yet
+            </span>
+          </div>
+          {{else}}
+            {{#each servants}}
+            <div class="col myservant-card" data-servantid={{id}} data-favorite="{{favorite}}">
+              {{#if sortInfo}}
+              <span class="sort-info">{{sortInfo.name}}: {{sortInfo.value}}</span>
+              {{/if}}
+              <div class="myservant-avt">
+                <a href="/user/my-servants/details/{{id}}">
+                  <img class="myservant-avt-img" src="{{avatar}}" alt="servant-avatar">
+                </a>
+                {{#if favorite}}
+                <span class="favorite-servant-heart">
+                  <i class="fa-solid fa-sun"></i>
+                </span>
+                {{/if}}
+              </div>
+              <span class="myservant-star">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </span>
+              <div class="myservant-name">
+                <a href="/user/my-servants/details/{{id}}">{{name}}</a>
+              </div>
+            </div>
+            {{/each}}
+          {{/unless}}
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-secondary rounded-3 me-3" id="cancel-btn" hidden>
+            Cancel
+          </button>
+          <button type="button" class="btn btn-success rounded-3" id="confirm-btn" hidden>
+            Confirm
+          </button>
+        </div>
+      </div>
+      <div class="col-3 d-flex flex-column">
+        <button type="button" class="btn btn-secondary fav-btn rounded-2 mb-2" id="add-fav-servants-btn">
+          Add favorite servants
+        </button>
+        <button type="button" class="btn btn-secondary fav-btn rounded-2" id="remove-fav-servant-btn">
+          Remove favorite servants
+        </button>
+        <div class="form-check mt-2">
+          <input type="checkbox" class="form-check-input" id="favorite-only">
+          <label class="form-check-label" for="favorite-only">Favorite servants only</label>
+        </div>
       </div>
     </div>
   </div>

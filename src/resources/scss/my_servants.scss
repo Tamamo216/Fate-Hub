@@ -85,7 +85,8 @@
   color: crimson;
 }
 .myservant-detail-name {
-  font-size: 1.5em;
+  font-family: 'Lato', sans-serif;
+  font-size: 2em;
   font-weight: 600;
   color: crimson;
   margin-left: 20px;
@@ -109,6 +110,7 @@ button.clicked, button.clicked:hover {
   padding: 5px;
   margin-bottom: 2px;
   border-radius: 10px;
+  font-size: 0.8em;
 }
 
 .instruction-text {

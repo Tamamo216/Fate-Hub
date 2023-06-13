@@ -53,5 +53,32 @@ function generateClassTab(servantsByClass, options) {
   }
   return out;
 }
-
-module.exports = { eachRow, select, selectBirthDay, servantsByClass, generateClassTab };
+function generatePageLink(currentPage, totalPage, options) {
+  let out = "";
+  const pagePerGroup = 4;
+  if (totalPage - currentPage < pagePerGroup) {
+    for (let i = (totalPage < pagePerGroup) ? 1 : totalPage-pagePerGroup+1; i < totalPage+1; ++i) {
+      let renderedHTML = options.fn({currentPage: i});
+    if (i === currentPage)
+      renderedHTML = renderedHTML.replace("page-link", "page-link active");
+    out += renderedHTML;
+    }
+  }
+  else {
+    for (let i = currentPage; i < currentPage+4 && i < totalPage+1; ++i) {
+      let renderedHTML = options.fn({currentPage: i});
+      if (i === currentPage)
+        renderedHTML = renderedHTML.replace("page-link", "page-link active");
+      out += renderedHTML;
+    }
+  }
+  return out;
+}
+module.exports = { 
+  eachRow, 
+  select, 
+  selectBirthDay, 
+  servantsByClass, 
+  generateClassTab,
+  generatePageLink
+};
